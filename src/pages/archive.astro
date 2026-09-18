@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatDate } from "../lib/date";
+import { href } from "../lib/links";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
+const categories = [...new Set(posts.map((post) => post.data.category))];
+---
+
+<BaseLayout title="文章归档" description="字节矿脉的全部技术文章。">
+  <div class="container page-hero"><p class="eyebrow">ARCHIVE</p><h1>文章归档</h1><p>所有文章按时间倒序排列。你也可以按分类继续挖掘。</p></div>
+  <div class="container section">
+    <ul class="filter-list">
+      <li><a href={href("/archive/")}>全部 {posts.length}</a></li>
+      {categories.map((category) => <li><a href={href(`/category/${encodeURIComponent(category)}/`)}>{category}</a></li>)}
+    </ul>
+    <div class="archive-list">
+      {posts.map((post) => (
+        <article class="archive-item">
+          <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+          <h2><a href={href(`/blog/${post.id}/`)}>{post.data.title}</a></h2>
+          <a class="archive-category" href={href(`/category/${encodeURIComponent(post.data.category)}/`)}>{post.data.category}</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

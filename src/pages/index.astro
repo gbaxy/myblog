@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { href } from "../lib/links";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
+const featured = posts.find((post) => post.data.featured) || posts[0];
+const recent = posts.filter((post) => post.id !== featured?.id).slice(0, 4);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-content">
+      <p class="eyebrow">BYTE VEIN / ENGINEERING NOTES</p>
+      <h1>向下挖掘，<br />直到遇见<em>答案</em>。</h1>
+      <p class="hero-copy">一个努力挖矿的工程师。记录软件工程、系统设计与那些值得反复琢磨的问题。</p>
+      <div class="hero-actions">
+        <a class="button" href={href("/archive/")}>阅读文章 →</a>
+        <a class="button secondary" href={href("/about/")}>认识我</a>
+      </div>
+      <div class="hero-meta"><span>ASTRO POWERED</span><span>MARKDOWN FIRST</span><span>OPEN NOTES</span></div>
+    </div>
+  </section>
+
+  <div class="container section">
+    <div class="section-heading">
+      <h2>精选挖掘</h2>
+      <a class="text-link" href={href("/archive/")}>全部文章 →</a>
+    </div>
+    {featured && <div class="post-grid"><PostCard post={featured} featured /></div>}
+  </div>
+
+  <div class="container section">
+    <div class="section-heading"><h2>最近更新</h2><a class="text-link" href={href("/rss.xml")}>订阅 RSS ↗</a></div>
+    <div class="post-grid">
+      {recent.map((post) => <PostCard post={post} />)}
+    </div>
+  </div>
+</BaseLayout>

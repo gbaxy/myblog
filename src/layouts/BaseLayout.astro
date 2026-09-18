@@ -1,0 +1,83 @@
+---
+import { navigation, site } from "../config";
+import { href } from "../lib/links";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} | ${site.title}` : `${site.title} | ${site.description}`;
+const pathname = Astro.url.pathname;
+const canonical = new URL(pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="author" content={site.author} />
+    <meta name="theme-color" content="#0b1015" />
+    <link rel="icon" type="image/svg+xml" href={href("/favicon.svg")} />
+    <link rel="alternate" type="application/rss+xml" title={`${site.title} RSS`} href={href("/rss.xml")} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      const savedTheme = localStorage.getItem("byte-vein-theme");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = savedTheme || systemTheme;
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href={href("/")} aria-label={`${site.title} 首页`}>
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span class="brand-text">{site.title}<small>{site.englishTitle.toUpperCase()}</small></span>
+        </a>
+        <nav class="nav" id="site-nav" aria-label="主导航">
+          {
+            navigation.map((item) => (
+              <a class:list={{ active: pathname === href(item.href) }} href={href(item.href)}>{item.label}</a>
+            ))
+          }
+        </nav>
+        <div class="header-actions">
+          <a class="icon-button" href={href("/search/")} aria-label="搜索文章" title="搜索文章">⌕</a>
+          <ThemeToggle />
+          <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航菜单">☰</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© {new Date().getFullYear()} {site.title} · Built with Astro</span>
+        <span class="footer-links">
+          <a href={href("/rss.xml")}>RSS</a>
+          <a href={site.links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+        </span>
+      </div>
+    </footer>
+    <script is:inline>
+      const menuToggle = document.querySelector("#menu-toggle");
+      const nav = document.querySelector("#site-nav");
+      menuToggle?.addEventListener("click", () => {
+        const open = nav?.getAttribute("data-open") === "true";
+        nav?.setAttribute("data-open", String(!open));
+        menuToggle.setAttribute("aria-expanded", String(!open));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { href } from "../lib/links";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+const categories = [...new Set(posts.map((post) => post.data.category))].sort();
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+const countCategory = (category: string) => posts.filter((post) => post.data.category === category).length;
+const countTag = (tag: string) => posts.filter((post) => post.data.tags.includes(tag)).length;
+---
+
+<BaseLayout title="分类与标签" description="按主题浏览字节矿脉的技术文章。">
+  <div class="container page-hero"><p class="eyebrow">TAXONOMY</p><h1>分类与标签</h1><p>以主题为矿脉，顺着线索继续探索。</p></div>
+  <div class="container section">
+    <div class="section-heading"><h2>分类</h2></div>
+    <div class="taxonomy-grid">
+      {categories.map((category) => (
+        <a class="taxonomy-card" href={href(`/category/${encodeURIComponent(category)}/`)}>
+          <span class="count">{String(countCategory(category)).padStart(2, "0")} POSTS</span>
+          <h2>{category}</h2>
+          <p>查看「{category}」下的全部文章。</p>
+        </a>
+      ))}
+    </div>
+  </div>
+  <div class="container section">
+    <div class="section-heading"><h2>标签</h2></div>
+    <div class="tag-list">
+      {tags.map((tag) => <a class="tag" href={href(`/tag/${encodeURIComponent(tag)}/`)}>#{tag} ({countTag(tag)})</a>)}
+    </div>
+  </div>
+</BaseLayout>

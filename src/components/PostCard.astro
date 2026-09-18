@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../lib/date";
+import { href } from "../lib/links";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  featured?: boolean;
+}
+
+const { post, featured = false } = Astro.props;
+---
+
+<a class:list={["post-card", { featured }]} href={href(`/blog/${post.id}/`)}>
+  <span class="badge">{post.data.category}</span>
+  <h3>{post.data.title}</h3>
+  <p>{post.data.description}</p>
+  <div class="post-card-meta">
+    <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+    {post.data.tags.slice(0, 3).map((tag) => <span>#{tag}</span>)}
+  </div>
+</a>

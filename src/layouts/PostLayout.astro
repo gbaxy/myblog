@@ -1,0 +1,102 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import Comment from "../components/Comment.astro";
+import { formatDate, readingTime } from "../lib/date";
+import { href } from "../lib/links";
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  headings: Heading[];
+  previous?: CollectionEntry<"blog">;
+  next?: CollectionEntry<"blog">;
+}
+
+const { post, headings, previous, next } = Astro.props;
+const wordCount = readingTime(post.body);
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <div class="container article-shell">
+    <article>
+      <header class="article-header">
+        <a class="badge" href={href(`/category/${encodeURIComponent(post.data.category)}/`)}>{post.data.category}</a>
+        <h1>{post.data.title}</h1>
+        <p class="article-summary">{post.data.description}</p>
+        <div class="article-meta">
+          <time datetime={post.data.published.toISOString()}>发布于 {formatDate(post.data.published)}</time>
+          {post.data.updated && <time datetime={post.data.updated.toISOString()}>更新于 {formatDate(post.data.updated)}</time>}
+          <span>{wordCount} 分钟阅读</span>
+        </div>
+      </header>
+      <div class="prose" data-pagefind-body>
+        <slot />
+      </div>
+      <footer class="article-footer">
+        <div class="tag-list">
+          {post.data.tags.map((tag) => <a class="tag" href={href(`/tag/${encodeURIComponent(tag)}/`)}>#{tag}</a>)}
+        </div>
+      </footer>
+      <nav class="article-nav" aria-label="相邻文章">
+        {next && <a href={href(`/blog/${next.id}/`)}><span>← 较新文章</span>{next.data.title}</a>}
+        {previous && <a href={href(`/blog/${previous.id}/`)}><span>较早文章 →</span>{previous.data.title}</a>}
+      </nav>
+      <Comment />
+    </article>
+    {toc.length > 0 && (
+      <aside class="article-aside" aria-label="文章目录">
+        <span class="eyebrow">ON THIS PAGE</span>
+        {toc.map((heading) => <a style={`padding-left:${(heading.depth - 2) * 10}px`} href={`#${heading.slug}`}>{heading.text}</a>)}
+      </aside>
+    )}
+  </div>
+  <script>
+    const diagrams = Array.from(document.querySelectorAll("pre > code.language-mermaid"))
+      .map((code) => {
+        const diagram = document.createElement("div");
+        diagram.className = "mermaid";
+        diagram.dataset.source = code.textContent || "";
+        code.closest("pre")?.replaceWith(diagram);
+        return diagram;
+      });
+
+    const renderDiagrams = async () => {
+      if (!diagrams.length) return;
+      const { default: mermaid } = await import("mermaid");
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: document.documentElement.dataset.theme === "light" ? "default" : "dark",
+        securityLevel: "strict",
+      });
+      diagrams.forEach((diagram) => {
+        diagram.removeAttribute("data-processed");
+        diagram.textContent = diagram.dataset.source || "";
+      });
+      await mermaid.run({ nodes: diagrams });
+    };
+
+    void renderDiagrams();
+    window.addEventListener("themechange", () => void renderDiagrams());
+
+    document.querySelectorAll("pre").forEach((block) => {
+      if (block.querySelector("code.language-mermaid")) return;
+      const copy = document.createElement("button");
+      copy.className = "copy-code";
+      copy.type = "button";
+      copy.textContent = "复制";
+      copy.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(block.querySelector("code")?.textContent || "");
+        copy.textContent = "已复制";
+        window.setTimeout(() => (copy.textContent = "复制"), 1600);
+      });
+      block.append(copy);
+    });
+  </script>
+</BaseLayout>

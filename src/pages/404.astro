@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { href } from "../lib/links";
+---
+
+<BaseLayout title="页面未找到">
+  <section class="container content-page">
+    <p class="eyebrow">404 / LOST TUNNEL</p>
+    <h1>这条矿道还不存在。</h1>
+    <p class="lede">页面可能被移动、改名，或者从未被开掘过。</p>
+    <a class="button" href={href("/")}>回到首页 →</a>
+  </section>
+</BaseLayout>

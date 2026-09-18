@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../config";
+---
+
+<BaseLayout title="关于" description="关于字节矿脉与它的作者。">
+  <article class="container content-page">
+    <p class="eyebrow">ABOUT THE MINER</p>
+    <h1>挖掘复杂世界里<br />值得留下的东西。</h1>
+    <p class="lede">你好，我是 {site.author}。这是我的个人技术博客，也是一个开放、持续生长的工程笔记库。</p>
+    <h2>我在这里写什么</h2>
+    <p>这里会记录软件工程实践、系统设计思考、工具与工作流，以及那些没有标准答案但值得慢慢拆解的问题。文章会尽量给出背景、决策过程与可复用的经验，而不仅是结论。</p>
+    <h2>这个站点</h2>
+    <p>字节矿脉使用 Astro 构建，文章以 Markdown 保存在 Git 仓库中。它很轻，也能长期维护；所有内容会随着实践不断更新。</p>
+    <h2>联系我</h2>
+    <p>可以通过 <a href={site.links.github} target="_blank" rel="noreferrer">GitHub</a> 找到我。这里的姓名和链接都可在 <code>src/config.ts</code> 中替换。</p>
+  </article>
+</BaseLayout>
