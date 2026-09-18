@@ -2,32 +2,36 @@
 
 :root {
   color-scheme: dark;
-  --bg: #0b1015;
-  --surface: #121a22;
-  --surface-raised: #18232d;
-  --text: #edf4f2;
-  --muted: #9baaa9;
-  --line: #27333c;
-  --accent: #6ee7bc;
-  --accent-strong: #21b984;
-  --accent-dim: #123b31;
-  --code: #101820;
+  --bg: #17110d;
+  --surface: #211813;
+  --surface-raised: #2b1e17;
+  --text: #fff7ed;
+  --muted: #cdb9aa;
+  --line: #493229;
+  --accent: #ffb35c;
+  --accent-strong: #f1844b;
+  --accent-dim: #4b291a;
+  --accent-ink: #321704;
+  --accent-hover: #ffd095;
+  --code: #1c1310;
   --shadow: 0 16px 44px rgb(0 0 0 / 18%);
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f7faf8;
+  --bg: #fff9f3;
   --surface: #ffffff;
-  --surface-raised: #eef5f1;
-  --text: #14211f;
-  --muted: #60716d;
-  --line: #dbe6e1;
-  --accent: #117b59;
-  --accent-strong: #096448;
-  --accent-dim: #d9f5e9;
-  --code: #f1f6f4;
-  --shadow: 0 16px 44px rgb(23 49 41 / 8%);
+  --surface-raised: #fff0e2;
+  --text: #302019;
+  --muted: #7d6657;
+  --line: #ecd7c4;
+  --accent: #bd5926;
+  --accent-strong: #99431a;
+  --accent-dim: #ffe2c9;
+  --accent-ink: #fff8f1;
+  --accent-hover: #d66a30;
+  --code: #fff4ea;
+  --shadow: 0 16px 44px rgb(89 47 25 / 9%);
 }
 
 * { box-sizing: border-box; }
@@ -43,13 +47,13 @@ body {
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--accent); }
 button { font: inherit; }
-::selection { color: #062419; background: var(--accent); }
+::selection { color: var(--accent-ink); background: var(--accent); }
 
 .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
 .site-header { border-bottom: 1px solid var(--line); }
 .header-inner { min-height: 74px; display: flex; align-items: center; gap: 30px; }
 .brand { display: flex; align-items: center; gap: 11px; margin-right: auto; font-weight: 700; letter-spacing: .02em; }
-.brand-mark { width: 28px; height: 28px; display: grid; place-items: center; color: #062419; background: var(--accent); clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); font: 600 12px "DM Mono", monospace; }
+.brand-mark { width: 28px; height: 28px; display: grid; place-items: center; color: var(--accent-ink); background: var(--accent); clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%); font: 600 12px "DM Mono", monospace; }
 .brand-text small { display: block; margin-top: -5px; color: var(--muted); font: 10px "DM Mono", monospace; letter-spacing: .12em; }
 .nav { display: flex; align-items: center; gap: 20px; color: var(--muted); font-size: .9rem; }
 .nav a.active, .nav a:hover { color: var(--text); }
@@ -79,8 +83,8 @@ main { min-height: calc(100vh - 205px); }
 .hero h1 em { color: var(--accent); font-style: normal; }
 .hero-copy { max-width: 620px; margin: 25px 0 0; color: var(--muted); font-size: 1.08rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 33px; }
-.button { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 5px; color: #062419; background: var(--accent); font-weight: 600; }
-.button:hover { color: #062419; background: #9af0d0; border-color: #9af0d0; }
+.button { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 5px; color: var(--accent-ink); background: var(--accent); font-weight: 600; }
+.button:hover { color: var(--accent-ink); background: var(--accent-hover); border-color: var(--accent-hover); }
 .button.secondary { color: var(--text); border-color: var(--line); background: transparent; }
 .button.secondary:hover { color: var(--accent); border-color: var(--accent); }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 21px; margin-top: 50px; color: var(--muted); font: .75rem "DM Mono", monospace; }
