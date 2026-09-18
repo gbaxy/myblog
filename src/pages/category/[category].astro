@@ -2,21 +2,28 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostCard from "../../components/PostCard.astro";
+import { categoryCatalog } from "../../config";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
-  const categories = [...new Set(posts.map((post) => post.data.category))];
+  const categories = [...new Set([...categoryCatalog.map((category) => category.name), ...posts.map((post) => post.data.category)])];
   return categories.map((category) => ({
     params: { category },
-    props: { category, posts: posts.filter((post) => post.data.category === category) },
+    props: {
+      category,
+      posts: posts.filter((post) => post.data.category === category),
+      description: categoryCatalog.find((item) => item.name === category)?.description ?? `这里收录与「${category}」有关的全部挖掘记录。`,
+    },
   }));
 }
 
-const { category, posts } = Astro.props;
+const { category, posts, description } = Astro.props;
 posts.sort((a: { data: { published: Date } }, b: { data: { published: Date } }) => b.data.published.valueOf() - a.data.published.valueOf());
 ---
 
 <BaseLayout title={category} description={`字节矿脉中关于 ${category} 的文章。`}>
-  <div class="container page-hero"><p class="eyebrow">CATEGORY / {category}</p><h1>{category}</h1><p>这里收录与「{category}」有关的全部挖掘记录。</p></div>
-  <div class="container section"><div class="post-grid">{posts.map((post: any) => <PostCard post={post} />)}</div></div>
+  <div class="container page-hero"><p class="eyebrow">CATEGORY / {category}</p><h1>{category}</h1><p>{description}</p></div>
+  <div class="container section">
+    {posts.length > 0 ? <div class="post-grid">{posts.map((post: any) => <PostCard post={post} />)}</div> : <p class="comment-note">这个分类已经开辟，第一篇文章正在挖掘中。</p>}
+  </div>
 </BaseLayout>

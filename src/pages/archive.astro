@@ -1,12 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { categoryCatalog } from "../config";
 import { formatDate } from "../lib/date";
 import { href } from "../lib/links";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
-const categories = [...new Set(posts.map((post) => post.data.category))];
+const categories = [...new Set([...categoryCatalog.map((category) => category.name), ...posts.map((post) => post.data.category)])];
 ---
 
 <BaseLayout title="文章归档" description="字节矿脉的全部技术文章。">

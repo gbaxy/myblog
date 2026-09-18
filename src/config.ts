@@ -22,6 +22,16 @@ export const site = {
   },
 } as const;
 
+/**
+ * 在这里登记需要提前展示的文章大类；即使暂时没有文章，分类页也会保留入口。
+ */
+export const categoryCatalog = [
+  {
+    name: "Audioreach",
+    description: "Audioreach 相关的技术记录、问题排查与工程实践。",
+  },
+] as const;
+
 export const navigation = [
   { label: "文章", href: "/archive/" },
   { label: "分类", href: "/categories/" },
