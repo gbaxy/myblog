@@ -58,7 +58,7 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
     )}
   </div>
   <script>
-    const diagrams = Array.from(document.querySelectorAll("pre > code.language-mermaid"))
+    const diagrams = Array.from(document.querySelectorAll("pre[data-language='mermaid'] > code"))
       .map((code) => {
         const diagram = document.createElement("div");
         diagram.className = "mermaid";
@@ -86,7 +86,7 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
     window.addEventListener("themechange", () => void renderDiagrams());
 
     document.querySelectorAll("pre").forEach((block) => {
-      if (block.querySelector("code.language-mermaid")) return;
+      if (block.matches("pre[data-language='mermaid']")) return;
       const copy = document.createElement("button");
       copy.className = "copy-code";
       copy.type = "button";
