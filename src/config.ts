@@ -30,6 +30,19 @@ export const categoryCatalog = [
     name: "Audioreach",
     description: "Audioreach 相关的技术记录、问题排查与工程实践。",
   },
+  {
+    name: "Linux 驱动开发",
+    description: "Linux 设备模型、驱动框架、硬件接口与嵌入式实践。",
+  },
+  {
+    name: "操作系统与系统编程",
+    description: "内核机制、Unix/Linux 系统调用与用户态系统编程。",
+  },
+  {
+    name: "C/C++ 语言与工程",
+    slug: "c-cpp",
+    description: "C/C++ 语言特性、内存模型、性能与工程实践。",
+  },
 ] as const;
 
 export const navigation = [

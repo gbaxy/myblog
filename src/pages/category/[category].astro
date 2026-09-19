@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
   const categories = [...new Set([...categoryCatalog.map((category) => category.name), ...posts.map((post) => post.data.category)])];
   return categories.map((category) => ({
-    params: { category },
+    params: { category: categoryCatalog.find((item) => item.name === category)?.slug ?? category },
     props: {
       category,
       posts: posts.filter((post) => post.data.category === category),

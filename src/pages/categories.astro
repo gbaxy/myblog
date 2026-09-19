@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { categoryCatalog } from "../config";
-import { href } from "../lib/links";
+import { categoryHref, href } from "../lib/links";
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 const categories = [...new Set([...categoryCatalog.map((category) => category.name), ...posts.map((post) => post.data.category)])].sort();
@@ -18,7 +18,7 @@ const categoryDescription = (category: string) => categoryCatalog.find((item) =>
     <div class="section-heading"><h2>分类</h2></div>
     <div class="taxonomy-grid">
       {categories.map((category) => (
-        <a class="taxonomy-card" href={href(`/category/${encodeURIComponent(category)}/`)}>
+        <a class="taxonomy-card" href={categoryHref(category)}>
           <span class="count">{String(countCategory(category)).padStart(2, "0")} POSTS</span>
           <h2>{category}</h2>
           <p>{categoryDescription(category)}</p>

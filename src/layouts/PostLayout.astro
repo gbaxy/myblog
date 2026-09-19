@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
 import Comment from "../components/Comment.astro";
 import { formatDate, readingTime } from "../lib/date";
-import { href } from "../lib/links";
+import { categoryHref, href } from "../lib/links";
 
 interface Heading {
   depth: number;
@@ -27,7 +27,7 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
   <div class="container article-shell">
     <article>
       <header class="article-header">
-        <a class="badge" href={href(`/category/${encodeURIComponent(post.data.category)}/`)}>{post.data.category}</a>
+        <a class="badge" href={categoryHref(post.data.category)}>{post.data.category}</a>
         <h1>{post.data.title}</h1>
         <p class="article-summary">{post.data.description}</p>
         <div class="article-meta">
