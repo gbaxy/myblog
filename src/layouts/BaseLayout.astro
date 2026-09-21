@@ -7,12 +7,35 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  article?: { published: Date; updated?: Date; tags: string[] };
+  noindex?: boolean;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, article, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} | ${site.title}` : `${site.title} | ${site.description}`;
 const pathname = Astro.url.pathname;
-const canonical = new URL(pathname, Astro.site);
+const isFile = pathname.split("/").pop()?.includes(".");
+const normalizedPath = pathname.endsWith("/") || isFile ? pathname : `${pathname}/`;
+const canonical = new URL(normalizedPath, Astro.site);
+const socialImage = new URL(href("/og.png"), Astro.site);
+const structuredData = article ? {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  image: socialImage.href,
+  url: canonical.href,
+  mainEntityOfPage: canonical.href,
+  datePublished: article.published.toISOString(),
+  dateModified: (article.updated ?? article.published).toISOString(),
+  author: { "@type": "Person", name: site.author, url: site.links.github },
+  publisher: { "@type": "Person", name: site.author, url: site.links.github },
+  inLanguage: "zh-CN",
+  keywords: article.tags.join(", "),
+} : null;
+const isActive = (path: string) => normalizedPath === href(path)
+  || (path === "/archive/" && normalizedPath.startsWith(href("/blog/")))
+  || (path === "/categories/" && ["/category/", "/tag/"].some((prefix) => normalizedPath.startsWith(href(prefix))));
 ---
 
 <!doctype html>
@@ -22,22 +45,48 @@ const canonical = new URL(pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="author" content={site.author} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#17110d" />
     <link rel="icon" type="image/svg+xml" href={href("/favicon.svg")} />
     <link rel="alternate" type="application/rss+xml" title={`${site.title} RSS`} href={href("/rss.xml")} />
     <link rel="canonical" href={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content="zh_CN" />
     <meta property="og:site_name" content={site.title} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage.href} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="字节矿脉 — 向下挖掘，直到遇见答案。" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage.href} />
+    <meta name="twitter:image:alt" content="字节矿脉 — 向下挖掘，直到遇见答案。" />
+    {article && <>
+      <meta property="article:published_time" content={article.published.toISOString()} />
+      <meta property="article:modified_time" content={(article.updated ?? article.published).toISOString()} />
+      <meta property="article:author" content={site.links.github} />
+      {article.tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    </>}
+    {structuredData && <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData).replace(/</g, "\\u003c")} />}
     <title>{pageTitle}</title>
     <script is:inline>
-      const savedTheme = localStorage.getItem("byte-vein-theme");
-      const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-      document.documentElement.dataset.theme = savedTheme || systemTheme;
+      (() => {
+        let savedTheme;
+        try { savedTheme = localStorage.getItem("byte-vein-theme"); } catch {}
+        const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : systemTheme;
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]').content = theme === "light" ? "#fff9f3" : "#17110d";
+      })();
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">跳到正文</a>
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href={href("/")} aria-label={`${site.title} 首页`}>
@@ -47,18 +96,18 @@ const canonical = new URL(pathname, Astro.site);
         <nav class="nav" id="site-nav" aria-label="主导航">
           {
             navigation.map((item) => (
-              <a class:list={{ active: pathname === href(item.href) }} href={href(item.href)}>{item.label}</a>
+              <a class:list={{ active: isActive(item.href) }} aria-current={normalizedPath === href(item.href) ? "page" : isActive(item.href) ? "location" : undefined} href={href(item.href)}>{item.label}</a>
             ))
           }
         </nav>
         <div class="header-actions">
-          <a class="icon-button" href={href("/search/")} aria-label="搜索文章" title="搜索文章">⌕</a>
+          <a class="icon-button" href={href("/search/")} aria-label="搜索文章" title="搜索文章"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></svg></a>
           <ThemeToggle />
           <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航菜单">☰</button>
         </div>
       </div>
     </header>
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <footer class="site-footer">

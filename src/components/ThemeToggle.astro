@@ -1,15 +1,23 @@
 <button class="icon-button" id="theme-toggle" type="button" aria-label="切换颜色主题" title="切换颜色主题">
-  <span aria-hidden="true">◐</span>
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8" /><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none" /></svg>
 </button>
 
 <script is:inline>
   const root = document.documentElement;
   const button = document.querySelector("#theme-toggle");
 
+  const updateThemeLabel = () => {
+    const label = root.dataset.theme === "light" ? "切换到深色主题" : "切换到浅色主题";
+    button?.setAttribute("aria-label", label);
+    button?.setAttribute("title", label);
+    document.querySelector('meta[name="theme-color"]').content = root.dataset.theme === "light" ? "#fff9f3" : "#17110d";
+  };
+  updateThemeLabel();
   button?.addEventListener("click", () => {
     const nextTheme = root.dataset.theme === "light" ? "dark" : "light";
     root.dataset.theme = nextTheme;
-    localStorage.setItem("byte-vein-theme", nextTheme);
+    try { localStorage.setItem("byte-vein-theme", nextTheme); } catch {}
+    updateThemeLabel();
     window.dispatchEvent(new CustomEvent("themechange"));
   });
 </script>

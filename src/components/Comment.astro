@@ -4,18 +4,10 @@ import { site } from "../config";
 const enabled = Boolean(site.giscus.repo && site.giscus.repoId && site.giscus.categoryId);
 ---
 
-<section class="comment-section" aria-labelledby="comments-title">
+{enabled && <section class="comment-section" aria-labelledby="comments-title" data-pagefind-ignore>
   <h2 id="comments-title">讨论</h2>
-  {
-    enabled ? (
-      <div class="giscus" data-giscus-container></div>
-    ) : (
-      <p class="comment-note">
-        评论将通过 Giscus 承载。部署前请在 <code>src/config.ts</code> 中填写仓库与分类 ID，具体步骤见 README。
-      </p>
-    )
-  }
-</section>
+  <div class="giscus" data-giscus-container></div>
+</section>}
 
 {
   enabled && (

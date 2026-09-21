@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#17110d"/>
+  <g fill="none" stroke="#493229" stroke-width="2">
+    <circle cx="1130" cy="90" r="180"/><circle cx="1130" cy="90" r="260"/><circle cx="1130" cy="90" r="340"/>
+  </g>
+  <path d="M78 66 103 81 103 111 78 126 53 111 53 81Z" fill="#ffb35c"/>
+  <text x="64" y="103" font-family="monospace" font-size="21" font-weight="bold" fill="#321704">&gt;_</text>
+  <text x="126" y="106" font-family="sans-serif" font-size="32" font-weight="bold" fill="#fff7ed">字节矿脉</text>
+  <text x="64" y="205" font-family="monospace" font-size="19" letter-spacing="3" fill="#ffb35c">BYTE VEIN / ENGINEERING NOTES</text>
+  <g font-family="sans-serif" font-weight="bold" font-size="76">
+    <text x="60" y="318" fill="#fff7ed">向下挖掘，</text>
+    <text x="60" y="418" fill="#fff7ed">直到遇见<tspan fill="#ffb35c">答案</tspan>。</text>
+  </g>
+  <path d="M64 509H1136" stroke="#493229"/>
+  <text x="64" y="563" font-family="sans-serif" font-size="23" fill="#cdb9aa">一个努力挖矿的工程师。</text>
+  <text x="1136" y="563" text-anchor="end" font-family="monospace" font-size="18" fill="#cdb9aa">GBAXY / OPEN NOTES</text>
+</svg>

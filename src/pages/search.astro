@@ -5,12 +5,13 @@ import { href } from "../lib/links";
 const pagefindBase = href("/pagefind/");
 ---
 
-<BaseLayout title="搜索" description="搜索字节矿脉的全部文章。">
+<BaseLayout title="搜索" description="搜索字节矿脉的全部文章。" noindex>
   <section class="container content-page">
     <p class="eyebrow">SEARCH</p>
     <h1>搜索文章</h1>
     <p class="lede">输入关键词，搜索标题、摘要和正文内容。</p>
     <div class="search-box" id="search"></div>
+    <noscript><p>搜索需要启用 JavaScript。你也可以<a class="text-link" href={href("/archive/")}>浏览文章归档</a>。</p></noscript>
   </section>
   <script is:inline define:vars={{ pagefindBase }}>
     const initialiseSearch = () => {
@@ -20,9 +21,9 @@ const pagefindBase = href("/pagefind/");
       document.head.append(css);
       const script = document.createElement("script");
       script.src = `${pagefindBase}pagefind-ui.js`;
-      script.onload = () => new window.PagefindUI({ element: "#search", showSubResults: true, resetStyles: false });
+      script.onload = () => new window.PagefindUI({ element: "#search", showSubResults: true, showImages: false, resetStyles: false });
       script.onerror = () => {
-        document.querySelector("#search").textContent = "搜索索引会在执行 npm run build 后生成。";
+        document.querySelector("#search").textContent = "搜索暂时无法加载，请刷新重试，或通过“文章”浏览归档。";
       };
       document.body.append(script);
     };

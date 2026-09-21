@@ -78,7 +78,7 @@ Giscus 使用 GitHub Discussions 保存评论，访客可用 GitHub 账号参与
 4. 将页面生成的 `data-repo`、`data-repo-id`、`data-category`、`data-category-id` 分别填入 `src/config.ts` 的 `giscus`；
 5. 重新构建或推送，文章底部就会出现评论区。
 
-没有填入这些值时，博客仍可正常构建，只会在评论区域显示一条本地配置提示。
+没有填入这些值时，博客仍可正常构建，文章页会隐藏评论区域。
 
 ## 文件结构
 
