@@ -114,6 +114,12 @@ main { min-height: calc(100vh - 205px); }
 .article-aside { position: sticky; top: 24px; align-self: start; padding-top: 10px; color: var(--muted); font-size: .78rem; }
 .article-aside a { display: block; margin-bottom: 8px; }
 .article-aside a:hover { color: var(--accent); }
+@media (min-width: 781px) {
+  .article-shell { width: min(1320px, calc(100% - 48px)); grid-template-columns: clamp(160px, 15vw, 220px) minmax(0, 1fr); column-gap: clamp(24px, 2.5vw, 40px); }
+  .article-shell > article { grid-column: 2; grid-row: 1; min-width: 0; }
+  .article-shell > article:only-child { grid-column: 1 / -1; width: 100%; max-width: 1060px; margin-inline: auto; }
+  .article-aside { grid-column: 1; grid-row: 1; max-height: calc(100dvh - 48px); overflow-y: auto; padding-right: 12px; scrollbar-width: thin; }
+}
 .prose { font-size: 1rem; }
 .prose > :first-child { margin-top: 0; }
 .prose h2, .prose h3 { scroll-margin-top: 30px; letter-spacing: -.03em; line-height: 1.3; }
