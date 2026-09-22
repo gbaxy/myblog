@@ -138,8 +138,25 @@ main { min-height: calc(100vh - 205px); }
 .prose table { display: block; overflow-x: auto; width: 100%; border-collapse: collapse; }
 .prose th, .prose td { padding: 10px 12px; border: 1px solid var(--line); text-align: left; }
 .prose th { background: var(--surface-raised); }
-.mermaid { display: grid; place-items: center; overflow: auto; margin: 26px 0; padding: 18px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); }
-.mermaid svg { max-width: 100%; height: auto; }
+.mermaid { --diagram-bg: #191715; --diagram-node-text: #eee6dc; position: relative; isolation: isolate; overflow: hidden; margin: 26px 0; border: 1px solid var(--line); border-radius: 7px; background: var(--diagram-bg); }
+:root[data-theme="light"] .mermaid { --diagram-bg: #fcfaf7; --diagram-node-text: #3d3026; }
+.mermaid-viewport { position: relative; height: var(--diagram-height, 320px); overflow: hidden; }
+.mermaid-viewport:focus-visible { outline-offset: -3px; }
+.mermaid-viewport.can-pan { cursor: grab; }
+.mermaid-viewport.can-pan .mermaid-scene { user-select: none; }
+.mermaid-viewport.is-panning { cursor: grabbing; }
+.mermaid-scene { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.mermaid-scene > svg { display: block; max-width: none; }
+.mermaid-scene p, .mermaid-scene .nodeLabel, .mermaid-scene .edgeLabel { color: var(--diagram-node-text); line-height: 1.5; }
+.mermaid-toolbar { position: absolute; z-index: 2; top: 10px; right: 10px; display: flex; align-items: center; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 6px; background: var(--diagram-bg); box-shadow: 0 2px 8px rgb(0 0 0 / 8%); }
+.mermaid-toolbar button { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 3px; color: var(--muted); background: transparent; cursor: pointer; }
+.mermaid-toolbar button:hover, .mermaid-toolbar button[aria-pressed="true"] { color: var(--accent); background: var(--accent-dim); }
+.mermaid-toolbar button:focus-visible { outline-offset: 1px; }
+.mermaid-toolbar .mermaid-scale { width: 48px; font: 11px Consolas, monospace; font-variant-numeric: tabular-nums; }
+.mermaid-hint { padding: 7px 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.5; text-align: center; }
+.mermaid > .mermaid-fallback { padding: 18px; }
+.mermaid:fullscreen { width: 100vw; height: 100dvh; margin: 0; border: 0; border-radius: 0; }
+.mermaid:fullscreen .mermaid-viewport { height: calc(100dvh - 32px); }
 .article-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; margin-top: 65px; padding-top: 25px; border-top: 1px solid var(--line); }
 .article-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 32px; }
 .article-nav a { max-width: 48%; color: var(--muted); font-size: .88rem; }

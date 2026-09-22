@@ -1,3 +1,5 @@
+import { createDiagramViewer, diagramConfig } from "./mermaid-viewer";
+
 const diagrams = Array.from(document.querySelectorAll<HTMLElement>("pre[data-language='mermaid']"))
   .map((pre) => {
     const container = document.createElement("div");
@@ -11,7 +13,7 @@ const diagrams = Array.from(document.querySelectorAll<HTMLElement>("pre[data-lan
     pre.replaceWith(container);
     fallback.append(summary, pre);
     container.append(fallback);
-    return { container, source, fallback, summary, seen: false };
+    return { container, source, fallback, summary, seen: false, viewer: undefined as ReturnType<typeof createDiagramViewer> | undefined };
   });
 
 // Serialize renders: Mermaid shares global configuration across diagrams.
@@ -32,13 +34,16 @@ async function renderPending() {
       try {
         const { default: mermaid } = await import("mermaid");
         const currentTheme = theme();
-        mermaid.initialize({ startOnLoad: false, theme: currentTheme, securityLevel: "strict", suppressErrorRendering: true });
+        mermaid.initialize(diagramConfig(currentTheme === "dark"));
         renderId = `blog-diagram-${++diagramId}`;
         const { svg, bindFunctions } = await mermaid.render(renderId, diagram.source);
-        diagram.container.innerHTML = svg;
+        diagram.viewer ??= createDiagramViewer(diagram.container);
+        diagram.viewer.update(svg);
         bindFunctions?.(diagram.container);
         if (theme() !== currentTheme) pending.add(diagram);
       } catch {
+        diagram.viewer?.destroy();
+        diagram.viewer = undefined;
         diagram.summary.textContent = "图表暂时无法显示，查看源代码";
         diagram.container.replaceChildren(diagram.fallback);
       } finally {
