@@ -1,10 +1,16 @@
 ---
-title: "从这里开始：字节矿脉的第一篇记录"
-description: "为什么要再做一个技术博客，以及我希望如何用它沉淀工程实践。"
-published: 2026-09-19
-category: "随笔"
-tags: ["博客", "写作", "工程实践"]
-featured: true
+title: 从这里开始：字节矿脉的第一篇记录
+description: 为什么要再做一个技术博客，以及我希望如何用它沉淀工程实践。
+date: "2026-09-19"
+link: hello-byte-vein
+categories:
+  - 随笔
+tags:
+  - 博客
+  - 写作
+  - 工程实践
+sticky: true
+cover: /img/byte-vein/life.svg
 ---
 
 欢迎来到字节矿脉。

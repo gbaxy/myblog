@@ -1,0 +1,137 @@
+/* Personal visual layer. Koharu components and motion remain upstream-owned. */
+:root {
+  --background: 214 54% 97%;
+  --foreground: 213 40% 24%;
+  --card: 0 0% 100%;
+  --card-foreground: 213 40% 24%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 213 40% 24%;
+  --primary: 212 52% 41%;
+  --primary-foreground: 214 70% 98%;
+  --secondary: 214 52% 94%;
+  --secondary-foreground: 213 40% 24%;
+  --muted: 214 52% 94%;
+  --muted-foreground: 215 17% 45%;
+  --accent: 214 56% 94%;
+  --accent-foreground: 213 40% 24%;
+  --border: 213 37% 90%;
+  --input: 213 37% 90%;
+  --ring: 212 52% 41%;
+  --badge-primary: 212 52% 41%;
+  --gradient-bg-start: #f5f8fc;
+  --gradient-bg-end: #e8eff8;
+  --gradient-pink: linear-gradient(115deg, #3265a0, #779ecf);
+  --gradient-header: linear-gradient(115deg, #e7eff9, #f5f8fc);
+  --gradient-shoka-button-start: #3265a0;
+  --gradient-shoka-button-end: #779ecf;
+  --color-pink: #3265a0;
+  --color-pink-a3: rgb(50 101 160 / 0.3);
+  --byte-serif: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif;
+}
+
+.dark {
+  --background: 216 49% 13%;
+  --foreground: 211 64% 94%;
+  --card: 216 42% 18%;
+  --card-foreground: 211 64% 94%;
+  --popover: 216 42% 18%;
+  --popover-foreground: 211 64% 94%;
+  --primary: 214 78% 77%;
+  --primary-foreground: 216 49% 13%;
+  --secondary: 215 39% 22%;
+  --secondary-foreground: 211 64% 94%;
+  --muted: 215 39% 22%;
+  --muted-foreground: 214 29% 73%;
+  --accent: 215 39% 24%;
+  --accent-foreground: 211 64% 94%;
+  --border: 214 30% 29%;
+  --input: 214 30% 29%;
+  --ring: 214 78% 77%;
+  --badge-primary: 214 78% 77%;
+  --gradient-bg-start: #111e31;
+  --gradient-bg-end: #0e1828;
+  --gradient-pink: linear-gradient(115deg, #779ecf, #99bff2);
+  --gradient-header: linear-gradient(115deg, #1b2b42, #23364f);
+  --gradient-shoka-button-start: #779ecf;
+  --gradient-shoka-button-end: #99bff2;
+  --color-pink: #99bff2;
+  --color-pink-a3: rgb(153 191 242 / 0.3);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+.logo-text,
+.dark .logo-text {
+  color: #c6defb;
+  font-family: var(--byte-serif);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  text-shadow: 0 2px 8px rgb(13 35 61 / 0.5);
+}
+
+#site-header.with-background .logo-text {
+  color: hsl(var(--primary));
+  text-shadow: none;
+}
+
+.cover-copy :is(h1, h2),
+.prose :is(h1, h2, h3) {
+  font-family: var(--byte-serif);
+}
+
+.cover-copy :is(h1, h2) {
+  text-shadow:
+    0 2px 8px rgb(13 35 61 / 0.65),
+    0 6px 28px rgb(13 35 61 / 0.35);
+}
+
+.cover-scrim,
+.dark .cover-scrim {
+  background: linear-gradient(90deg, rgb(15 38 66 / 0.65), rgb(15 38 66 / 0.28) 52%, rgb(15 38 66 / 0.08));
+}
+
+#banner-box img {
+  object-position: 70% center;
+}
+.prose {
+  line-height: var(--reader-line-height, 1.9);
+  overflow-wrap: anywhere;
+}
+.prose pre {
+  overflow-wrap: normal;
+}
+
+@media (min-width: 993px) {
+  .cover-copy {
+    align-items: flex-start;
+    padding-inline: max(7vw, calc((100vw - 76rem) / 2));
+  }
+  .cover-copy :is(h1, h2, p) {
+    max-width: 54%;
+    text-align: left;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .cover-hero:not(:has(.cover-copy-link)) {
+    min-height: 32rem;
+  }
+  .cover-copy :is(h1, h2) {
+    font-size: clamp(1.65rem, 6vw, 2.5rem);
+  }
+  .cover-copy h2 {
+    font-size: 1.4rem;
+    letter-spacing: 0.14em;
+  }
+  .cover-copy p {
+    line-height: 1.8;
+  }
+  .cover-scrim,
+  .dark .cover-scrim {
+    background: linear-gradient(0deg, rgb(15 38 66 / 0.76), rgb(15 38 66 / 0.15) 85%);
+  }
+}

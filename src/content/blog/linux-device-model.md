@@ -1,10 +1,18 @@
 ---
-title: "Linux 设备模型（LDM）：从总线匹配到 kobject"
-description: "从设备、驱动与总线如何相遇开始，梳理 Linux 设备模型中 kobject、kobj_type、kset 与 kref 的职责和关系。"
-published: 2026-09-19
-updated: 2026-09-19
-category: "Linux 驱动开发"
-tags: ["Linux", "驱动开发", "设备模型", "sysfs", "kobject"]
+title: Linux 设备模型（LDM）：从总线匹配到 kobject
+description: 从设备、驱动与总线如何相遇开始，梳理 Linux 设备模型中 kobject、kobj_type、kset 与 kref 的职责和关系。
+date: "2026-09-19"
+updated: "2026-09-19"
+link: linux-device-model
+categories:
+  - Linux 驱动开发
+tags:
+  - Linux
+  - 驱动开发
+  - 设备模型
+  - sysfs
+  - kobject
+cover: /img/byte-vein/linux-drivers.svg
 ---
 
 ## 1. Linux 设备模型解决什么问题？

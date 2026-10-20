@@ -1,8 +1,42 @@
-node_modules/
+# build output
 dist/
+.sonda/
+
+# generated types
 .astro/
-.DS_Store
-*.log
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
 .env
-.env.*
-!.env.example
+.env.production
+.env*.local
+
+# vercel
+.vercel
+.superset
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+.vscode/
+
+# Transformers.js model cache
+.cache/*
+# Keep OG data cache for Vercel builds
+!.cache/og-data.json
+
+# Backup files
+backups/
+
+# Local reference clones, migration snapshots and browser artifacts
+.references/

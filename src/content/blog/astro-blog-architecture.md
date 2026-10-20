@@ -1,9 +1,16 @@
 ---
-title: "一个静态技术博客的架构：从 Markdown 到 GitHub Pages"
-description: "用 Astro、Pagefind、Mermaid 与 GitHub Actions 组成一个可长期维护的静态博客。"
-published: 2026-09-18
-category: "工程实践"
-tags: ["Astro", "GitHub Pages", "静态站点", "Mermaid"]
+title: 一个静态技术博客的架构：从 Markdown 到 GitHub Pages
+description: 用 Astro、Pagefind、Mermaid 与 GitHub Actions 组成一个可长期维护的静态博客。
+date: "2026-09-18"
+link: astro-blog-architecture
+categories:
+  - 工程实践
+tags:
+  - Astro
+  - GitHub Pages
+  - 静态站点
+  - Mermaid
+cover: /img/byte-vein/engineering.svg
 ---
 
 静态博客最重要的不是“零后端”，而是把内容生产和发布路径压缩到足够可靠：写一篇 Markdown，提交一次 Git，剩下的事由构建系统完成。

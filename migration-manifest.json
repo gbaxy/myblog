@@ -1,0 +1,74 @@
+{
+  "upstream": "329ce55513a8057708c93c11c5b8c096680ad83c",
+  "articles": [
+    {
+      "file": "astro-blog-architecture.md",
+      "bodySha256": "65bfd1a73b59293d42aab40677fac3c7b45ac9d77e87a8eeb0b692036b91fe21",
+      "published": "2026-09-18",
+      "category": "工程实践",
+      "slug": "astro-blog-architecture",
+      "tags": ["Astro", "GitHub Pages", "静态站点", "Mermaid"]
+    },
+    {
+      "file": "audioreach-architecture.md",
+      "bodySha256": "9b1468ca4358169d7d3776d4af4b8ea6e7663a188e76f22cd84202230e9a4cef",
+      "published": "2026-10-18",
+      "updated": "2026-10-18",
+      "category": "Audioreach",
+      "slug": "audioreach-architecture",
+      "tags": ["AudioReach", "Qualcomm", "音频架构", "DSP", "PAL", "AGM", "GPR", "ACDB"]
+    },
+    {
+      "file": "engineering-notes.md",
+      "bodySha256": "a44c6823e39afc3b3f4fc884be105f5ab549a9a2aa2110f898ce3d39b400abcb",
+      "published": "2026-09-15",
+      "category": "效率工具",
+      "slug": "engineering-notes",
+      "tags": ["知识管理", "写作", "工作流"]
+    },
+    {
+      "file": "hello-byte-vein.md",
+      "bodySha256": "1cc1ece70c71d6ed837f7867fa94f0c8347be64a192e77cd212661a35f81d589",
+      "published": "2026-09-19",
+      "category": "随笔",
+      "slug": "hello-byte-vein",
+      "tags": ["博客", "写作", "工程实践"]
+    },
+    {
+      "file": "ldd3-building-and-running-modules.md",
+      "bodySha256": "f886aeb10b437878868cf68c19b58755fd6b58e8a4b25350d1112719f17c7255",
+      "published": "2025-08-05",
+      "updated": "2025-08-05",
+      "category": "Linux 驱动开发",
+      "slug": "ldd3-building-and-running-modules",
+      "tags": ["Linux", "驱动开发", "LDD3", "内核模块", "Makefile"]
+    },
+    {
+      "file": "ldd3-character-devices.md",
+      "bodySha256": "374ea7a4bb9067677bfd30fe7a48808da4f6b38f4da0d4e4ab657d6a33ff7add",
+      "published": "2025-08-11",
+      "updated": "2025-08-11",
+      "category": "Linux 驱动开发",
+      "slug": "ldd3-character-devices",
+      "tags": ["Linux", "驱动开发", "LDD3", "字符设备", "cdev"]
+    },
+    {
+      "file": "linux-device-model.md",
+      "bodySha256": "35c629a542d6ea3bdeb5f755ff96ef96a8e9437876d2fadffb516e5fe038148d",
+      "published": "2026-09-19",
+      "updated": "2026-09-19",
+      "category": "Linux 驱动开发",
+      "slug": "linux-device-model",
+      "tags": ["Linux", "驱动开发", "设备模型", "sysfs", "kobject"]
+    },
+    {
+      "file": "yocto-out-of-tree-modules.md",
+      "bodySha256": "b616b57f816a9af45ca07321a877c2f8cb2daead792f3659294c5699e6972c2a",
+      "published": "2026-04-26",
+      "updated": "2026-04-26",
+      "category": "Linux 驱动开发",
+      "slug": "yocto-out-of-tree-modules",
+      "tags": ["Linux", "驱动开发", "Yocto", "内核模块", "BitBake"]
+    }
+  ]
+}

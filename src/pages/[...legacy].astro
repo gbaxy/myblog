@@ -1,0 +1,34 @@
+---
+import { withBase } from '@lib/base-path';
+import { tagToSlug } from '@lib/content/tags';
+import config from '../../config/site.yaml';
+import manifest from '../../migration-manifest.json';
+
+export function getStaticPaths() {
+  const aliases = new Map<string, string>([['archive', '/archives']]);
+  for (const post of manifest.articles) {
+    aliases.set(`blog/${post.slug}`, `/post/${post.slug}`);
+    for (const tag of post.tags) aliases.set(`tag/${tag}`, `/tags/${tagToSlug(tag)}`);
+  }
+  for (const [category, slug] of Object.entries(config.categoryMap ?? {})) {
+    const oldSlug = category === 'C/C++ 语言与工程' ? 'c-cpp' : category;
+    aliases.set(`category/${oldSlug}`, `/categories/${slug}`);
+  }
+  return [...aliases].map(([legacy, target]) => ({ params: { legacy }, props: { target: withBase(target) } }));
+}
+
+const { target } = Astro.props;
+const canonical = new URL(target, Astro.site).href;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <title>文章已迁移 · 字节矿脉</title>
+    <script is:inline define:vars={{ target }}>location.replace(target + location.search + location.hash);</script>
+  </head>
+  <body data-pagefind-ignore="all"><p>页面已迁移：<a href={target}>继续阅读</a></p></body>
+</html>

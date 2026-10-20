@@ -1,10 +1,18 @@
 ---
-title: "LDD3：构造和运行模块"
-description: "从 Hello World 模块出发，记录 Linux 内核模块的编译、装载、卸载和运行时日志查看。"
-published: 2025-08-05
-updated: 2025-08-05
-category: "Linux 驱动开发"
-tags: ["Linux", "驱动开发", "LDD3", "内核模块", "Makefile"]
+title: LDD3：构造和运行模块
+description: 从 Hello World 模块出发，记录 Linux 内核模块的编译、装载、卸载和运行时日志查看。
+date: "2025-08-05"
+updated: "2025-08-05"
+link: ldd3-building-and-running-modules
+categories:
+  - Linux 驱动开发
+tags:
+  - Linux
+  - 驱动开发
+  - LDD3
+  - 内核模块
+  - Makefile
+cover: /img/byte-vein/linux-drivers.svg
 ---
 
 从hello world开始,写一个自己的驱动模块.代码如下:

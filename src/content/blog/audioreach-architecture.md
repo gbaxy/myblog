@@ -1,10 +1,21 @@
 ---
-title: "AudioReach 架构全景：从 PAL 到 DSP 图引擎"
-description: "基于公开资料梳理 AudioReach 的平台适配、图服务、DSP 引擎、键向量、数据通路与端到端工作流。"
-published: 2026-10-18
-updated: 2026-10-18
-category: "Audioreach"
-tags: ["AudioReach", "Qualcomm", "音频架构", "DSP", "PAL", "AGM", "GPR", "ACDB"]
+title: AudioReach 架构全景：从 PAL 到 DSP 图引擎
+description: 基于公开资料梳理 AudioReach 的平台适配、图服务、DSP 引擎、键向量、数据通路与端到端工作流。
+date: "2026-10-18"
+updated: "2026-10-18"
+link: audioreach-architecture
+categories:
+  - Audioreach
+tags:
+  - AudioReach
+  - Qualcomm
+  - 音频架构
+  - DSP
+  - PAL
+  - AGM
+  - GPR
+  - ACDB
+cover: /img/byte-vein/audioreach.svg
 ---
 
 > 版本：v1.0（2025-02 整理）

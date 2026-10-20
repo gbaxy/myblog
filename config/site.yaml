@@ -1,0 +1,220 @@
+# 字节矿脉 · Koharu 7.7.4
+# 部署子路径见 src/lib/base-path.ts。文章使用 date / categories / link。
+site:
+  title: 字节矿脉
+  alternate: Byte Vein
+  subtitle: 在复杂世界里，挖掘值得留下的东西
+  name: gbaxy
+  description: 一个努力挖矿的工程师。
+  avatar: /favicon.svg
+  showLogo: false
+  author: gbaxy
+  url: https://gbaxy.github.io/myblog/
+  defaultOgImage: /myblog/og.png
+  startYear: 2026
+  timezone: Asia/Shanghai
+  keywords:
+    - Linux
+    - 嵌入式
+    - 驱动开发
+    - 工程实践
+    - 技术博客
+i18n:
+  defaultLocale: zh
+  locales:
+    - code: zh
+      label: 中文
+categoryMap:
+  Audioreach: audioreach
+  Linux 驱动开发: linux-drivers
+  操作系统与系统编程: systems
+  C/C++ 语言与工程: c-cpp
+  效率工具: tools
+  随笔: life
+  工程实践: engineering
+featuredCategories:
+  - link: audioreach
+    label: Audioreach
+    description: 音频框架与信号链
+    image: /img/byte-vein/audioreach.svg
+  - link: linux-drivers
+    label: Linux 驱动开发
+    description: 从内核接口到设备驱动
+    image: /img/byte-vein/linux-drivers.svg
+  - link: systems
+    label: 操作系统与系统编程
+    description: 系统机制与底层实现
+    image: /img/byte-vein/systems.svg
+  - link: c-cpp
+    label: C/C++ 语言与工程
+    description: 语言、构建与工程实践
+    image: /img/byte-vein/c-cpp.svg
+featuredSeries: []
+social:
+  github:
+    url: https://github.com/gbaxy
+    icon: ri:github-fill
+    color: "#3265a0"
+  rss:
+    url: /myblog/rss.xml
+    icon: ri:rss-line
+    color: "#3265a0"
+friends:
+  groups:
+    - id: familiar
+      title: 熟人
+      description: 常有交流、彼此熟悉的朋友。
+    - id: community
+      title: 友链小伙伴
+      description: 通过博客结识、交换友链的小伙伴。
+    - id: following
+      title: 单向关注
+      description: 喜欢阅读、推荐给大家的博客。
+  intro:
+    title: 友情链接
+    subtitle: 欢迎交换友链！
+    applyTitle: 申请友链
+    applyDesc: 请在本页留言，格式如下
+    exampleYaml: |
+      - site: 你的博客名称 # 站点名称
+        url: https://your-blog.com/ # 站点网址
+        owner: 你的昵称 # 昵称
+        desc: 站点简介 # 站点简介
+        image: https://your-blog.com/avatar.jpg # 头像链接
+        color: "#ffc0cb" # 主题色（可选）
+  data: []
+announcements: null
+content:
+  addBlankTarget: true
+  smoothScroll: true
+  addHeadingLevel: true
+  enhanceCodeBlock: true
+  enableCodeCopy: true
+  enableCodeFullscreen: true
+  enableLinkEmbed: true
+  enableCodePenEmbed: false
+  enableTweetEmbed: false
+  enableOGPreview: false
+  previewCacheTime: 30
+  lazyLoadEmbeds: true
+  postCardImagePosition: alternating
+  enableShokaContainers: true
+  enableShokaAttrs: true
+  enableShokaEffects: true
+  enableShokaSpoiler: true
+  enableShokaRuby: true
+  enableShokaHexoTags: true
+  enableMath: true
+  enableCodeMeta: true
+  enableQuiz: true
+  enableEncryptedBlock: true
+motion:
+  level: lively
+  heroPetals: false
+  clickBurst: false
+moments:
+  enabled: false
+  path: moments
+  title: 碎碎念
+  description: 记录频道中的日常消息
+editor:
+  enabled: false
+colophon:
+  enabled: false
+  defaults: []
+  groups:
+    authorship:
+      label: 执笔
+      exclusive: true
+      placement:
+        - meta
+        - seal
+        - card
+    notice:
+      label: 阅读提示
+      placement:
+        - meta
+        - banner
+  marks:
+    handwritten:
+      group: authorship
+      icon: ri:quill-pen-line
+      label: 手写
+      description: 每个字都是我自己敲的。
+    ai-cowrite:
+      group: authorship
+      icon: ri:sparkling-2-line
+      label: 与 AI 合写
+      description: 我主笔，AI 帮我理思路、换说法。
+    ai-lead:
+      group: authorship
+      icon: ri:sparkling-2-fill
+      label: AI 主笔
+      description: 正文主要由 AI 起草，我负责挑选和改写。
+    spoiler:
+      group: notice
+      icon: ri:eye-off-line
+      label: 含剧透
+      description: 涉及作品后续剧情，还没看完的话可以先收藏。
+      tone: warn
+    outdated:
+      group: notice
+      icon: ri:hourglass-line
+      label: 可能已过时
+      description: 写得比较早，文中的版本和做法可能已经变了。
+      tone: warn
+postActions:
+  copyMarkdown: true
+  downloadMarkdown: true
+  openInEditor: "off"
+navigation:
+  - name: 首页
+    path: /
+    icon: ri:home-heart-fill
+  - name: 文章
+    path: /archives
+    icon: ri:archive-2-fill
+  - name: 分类
+    path: /categories
+    icon: ri:grid-fill
+  - name: 项目
+    path: /projects
+    icon: ri:code-box-line
+  - name: 现在
+    path: /now
+    icon: ri:time-line
+  - name: 关于
+    path: /about
+    icon: fa6-regular:circle-user
+comment:
+  provider: none
+analytics:
+  umami:
+    enabled: false
+seo:
+  robots: null
+bgm:
+  enabled: false
+  audio: []
+christmas:
+  enabled: false
+dev:
+  localProjectPath: E:/myblog
+  contentRelativePath: src/content/blog
+  editors:
+    - id: vscode
+      name: VS Code
+      icon: devicon-plain:vscode
+      urlTemplate: vscode://file/{path}
+    - id: cursor
+      name: Cursor
+      icon: simple-icons:cursor
+      urlTemplate: cursor://file/{path}
+    - id: zed
+      name: Zed
+      icon: simple-icons:zedindustries
+      urlTemplate: zed://file/{path}
+
+defaultCoverList:
+  - /img/byte-vein/engineering.svg
+  - /img/byte-vein/linux-drivers.svg

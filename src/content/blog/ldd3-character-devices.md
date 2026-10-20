@@ -1,10 +1,18 @@
 ---
-title: "LDD3：字符驱动设备"
-description: "记录字符设备的主次设备号、注册、file_operations、cdev 与设备节点等核心概念。"
-published: 2025-08-11
-updated: 2025-08-11
-category: "Linux 驱动开发"
-tags: ["Linux", "驱动开发", "LDD3", "字符设备", "cdev"]
+title: LDD3：字符驱动设备
+description: 记录字符设备的主次设备号、注册、file_operations、cdev 与设备节点等核心概念。
+date: "2025-08-11"
+updated: "2025-08-11"
+link: ldd3-character-devices
+categories:
+  - Linux 驱动开发
+tags:
+  - Linux
+  - 驱动开发
+  - LDD3
+  - 字符设备
+  - cdev
+cover: /img/byte-vein/linux-drivers.svg
 ---
 
 ### 1. 主次设备号

@@ -1,92 +1,57 @@
-# 字节矿脉 / Byte Vein
+# 字节矿脉 · Byte Vein
 
-一个基于 Astro 的中文静态技术博客：Markdown 写作、深浅色主题、Mermaid 图表、Pagefind 本地搜索、RSS 与 Giscus 评论。
+gbaxy 的工程笔记，记录 Linux 驱动、系统编程、Audioreach 与工程实践。
+
+基于 [astro-koharu](https://github.com/cosZone/astro-koharu) 7.7.4（上游提交 `329ce55513a8057708c93c11c5b8c096680ad83c`），使用 Astro **7.1.3**、React **19.2.1**、Tailwind CSS **4.3.3**、Motion **12.43.0**。保留上游 AGPL-3.0 许可证和页脚署名。
 
 ## 本地运行
 
-需要 Node.js 22 或更高版本。
+需要 Node **>=22.20.0**（已用 24.19.0 验证）和 pnpm **10.28.2**。当前系统 Node 22.18.0 需要升级；也可在 PowerShell 中使用已经准备的独立运行时：
 
-```bash
-npm install
-npm run dev
+```powershell
+$env:PATH = 'C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin;E:\myblog\.references\runtime\node_modules\.bin;' + $env:PATH
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-在浏览器打开终端显示的本地地址。生产构建与预览：
+本地地址为 `http://localhost:4321/myblog/`。
 
-```bash
-npm run build
-npm run preview
+```sh
+pnpm check
+pnpm lint:fix
+pnpm test
+pnpm build
+pnpm preview
 ```
 
-`npm run build` 会先执行 Astro 静态构建，再执行 Pagefind，为文章生成不依赖第三方服务的全文搜索索引。
+## 内容与视觉
 
-## 写文章
+- `config/site.yaml`：站点资料、导航、分类、动效和功能开关。
+- `src/content/blog/`：文章，使用 `date`、`updated`、`categories`、`tags`、`link`、`sticky`。
+- `src/styles/byte-vein.css`：蓝色视觉、深色模式和阅读排版。
+- `public/img/byte-vein/`：薇尔莉特同人主图、手机裁切和分类插画。主图为 AI 生成同人插画。
+- `src/lib/base-path.ts`：部署前缀 `/myblog`。
+- `src/pages/[...legacy].astro`：旧文章、分类、标签和归档地址的静态兼容跳转。
 
-在 `src/content/blog/` 下新建一个 `.md` 文件；文件名就是文章 URL 的一部分。每篇文章都需要下面的 frontmatter：
+示例文章头信息：
 
-```md
+```yaml
 ---
-title: "文章标题"
-description: "一句话摘要，用于列表和搜索结果。"
-published: 2026-09-19
-category: "工程实践"
-tags: ["Astro", "GitHub Pages"]
-draft: false
-featured: false
+title: 文章标题
+description: 文章简介
+date: "2026-10-20"
+link: stable-post-slug
+categories: [Linux 驱动开发]
+tags: [Linux, 驱动开发]
 ---
 ```
 
-流程、时序与架构图可以直接写 Mermaid：
+主题自带 SPA 转场、卡片动效、目录进度、移动目录、阅读设置、代码复制/全屏、图片查看、Mermaid 与 Pagefind 全文搜索。评论、统计、音乐、写作室和服务端动态功能目前关闭，静态托管不需要服务器。
 
-````md
-```mermaid
-flowchart LR
-  A[开始] --> B[构建]
-  B --> C[发布]
-```
-````
+## 部署与迁移记录
 
-文章页会自动渲染图表、生成目录并为普通代码块添加复制按钮。
+GitHub Actions 使用 `.node-version` 和 `pnpm-lock.yaml`，检查后构建并发布到 `https://gbaxy.github.io/myblog/`。推送到 `main` 或手动触发工作流才会发布。
 
-## 发布前配置
+2026-10-20 迁移保留原有 8 篇文章的正文、日期、分类与标签。旧 `/blog/<slug>/` 地址跳转至 `/post/<slug>`，并保留查询参数和锚点。原始正文校验值保存在 `migration-manifest.json`。
 
-编辑 `src/config.ts`：
-
-1. 将 `author`、`links.github` 改成你的信息；
-2. 将 `url` 改成实际 Pages 地址。
-   - 用户/组织站仓库 `用户名.github.io`：`url` 为 `https://用户名.github.io`，`base` 保持 `/`；
-   - 项目站仓库，例如 `myblog`：`url` 为 `https://用户名.github.io`，`base` 改为 `/myblog`。
-3. 如果将来绑定自定义域名，`url` 改成 `https://你的域名`，`base` 保持 `/`。
-
-## 启用 GitHub Pages
-
-1. 将本项目提交并推送到 GitHub 仓库的 `main` 分支；
-2. 在仓库打开 **Settings → Pages**；
-3. 在 **Build and deployment** 的 Source 选择 **GitHub Actions**；
-4. 推送后，Actions 中的 `Deploy Astro site to GitHub Pages` 工作流会自动运行；
-5. 部署地址会显示在工作流的 Deploy 步骤中。
-
-工作流文件在 `.github/workflows/deploy.yml`，以后每次推送 `main` 都会自动更新站点。
-
-## 启用评论（Giscus）
-
-Giscus 使用 GitHub Discussions 保存评论，访客可用 GitHub 账号参与，内容也归你的仓库所有。
-
-1. 到仓库 **Settings → General → Features** 勾选 **Discussions**；
-2. 在 [giscus.app/zh-CN](https://giscus.app/zh-CN) 授权并选择此仓库；
-3. 选择 Discussion 分类（建议 `Announcements`）；
-4. 将页面生成的 `data-repo`、`data-repo-id`、`data-category`、`data-category-id` 分别填入 `src/config.ts` 的 `giscus`；
-5. 重新构建或推送，文章底部就会出现评论区。
-
-没有填入这些值时，博客仍可正常构建，文章页会隐藏评论区域。
-
-## 文件结构
-
-```text
-src/content/blog/       Markdown 文章
-src/pages/              页面与路由
-src/layouts/            站点和文章布局
-src/config.ts           站点、链接、Giscus 配置
-src/styles/global.css   全局设计系统
-.github/workflows/      GitHub Pages 自动部署
-```
+本地备份位于 `.references/backups/2026-10-20-before-koharu/`，上游参考位于 `.references/astro-koharu/`。`.references/` 不进入版本控制和发布产物。

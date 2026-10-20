@@ -1,10 +1,18 @@
 ---
-title: "Yocto：树外模块整理"
-description: "梳理 Yocto 中树外内核模块的 recipe、设备树、固件、自动加载与镜像集成流程。"
-published: 2026-04-26
-updated: 2026-04-26
-category: "Linux 驱动开发"
-tags: ["Linux", "驱动开发", "Yocto", "内核模块", "BitBake"]
+title: Yocto：树外模块整理
+description: 梳理 Yocto 中树外内核模块的 recipe、设备树、固件、自动加载与镜像集成流程。
+date: "2026-04-26"
+updated: "2026-04-26"
+link: yocto-out-of-tree-modules
+categories:
+  - Linux 驱动开发
+tags:
+  - Linux
+  - 驱动开发
+  - Yocto
+  - 内核模块
+  - BitBake
+cover: /img/byte-vein/linux-drivers.svg
 ---
 
 ## 一、思路
