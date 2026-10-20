@@ -1,4 +1,6 @@
-# 字节矿脉 · Byte Vein
+# GBの博客
+
+一个程序农工
 
 gbaxy 的工程笔记，记录 Linux 驱动、系统编程、Audioreach 与工程实践。
 

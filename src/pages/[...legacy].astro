@@ -1,5 +1,6 @@
 ---
 import { withBase } from '@lib/base-path';
+import { siteConfig } from '@lib/config/site';
 import { tagToSlug } from '@lib/content/tags';
 import config from '../../config/site.yaml';
 import manifest from '../../migration-manifest.json';
@@ -27,7 +28,7 @@ const canonical = new URL(target, Astro.site).href;
     <meta name="robots" content="noindex" />
     <link rel="canonical" href={canonical} />
     <meta http-equiv="refresh" content={`0;url=${target}`} />
-    <title>文章已迁移 · 字节矿脉</title>
+    <title>文章已迁移 · {siteConfig.title}</title>
     <script is:inline define:vars={{ target }}>location.replace(target + location.search + location.hash);</script>
   </head>
   <body data-pagefind-ignore="all"><p>页面已迁移：<a href={target}>继续阅读</a></p></body>

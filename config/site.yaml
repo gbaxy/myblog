@@ -1,11 +1,11 @@
-# 字节矿脉 · Koharu 7.7.4
+# GBの博客 · Koharu 7.7.4
 # 部署子路径见 src/lib/base-path.ts。文章使用 date / categories / link。
 site:
-  title: 字节矿脉
-  alternate: Byte Vein
-  subtitle: 在复杂世界里，挖掘值得留下的东西
+  title: GBの博客
+  alternate: ""
+  subtitle: 一个程序农工
   name: gbaxy
-  description: 一个努力挖矿的工程师。
+  description: 一个程序农工
   avatar: /favicon.svg
   showLogo: false
   author: gbaxy
