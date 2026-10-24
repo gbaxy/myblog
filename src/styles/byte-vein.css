@@ -94,7 +94,9 @@ body {
 }
 
 #banner-box img {
-  object-position: 70% center;
+  /* Preserve the face when a wide viewport crops the banner vertically. */
+  object-position: 70% top;
+  transform-origin: 70% top;
 }
 .prose {
   line-height: var(--reader-line-height, 1.9);
@@ -113,6 +115,13 @@ body {
     max-width: 54%;
     text-align: left;
     justify-content: flex-start;
+  }
+}
+
+@media (min-width: 2000px) {
+  /* Leave room for the whole face above the wave, beyond the theme's height cap. */
+  .cover-hero {
+    min-height: 26vw;
   }
 }
 
