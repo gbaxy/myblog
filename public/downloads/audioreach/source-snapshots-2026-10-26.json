@@ -1,0 +1,67 @@
+{
+  "downloaded_at_utc": "2026-09-16T18:11:59.827374+00:00",
+  "purpose": "Source reading; independent default-branch snapshots, not a validated release combination",
+  "repositories": [
+    {
+      "name": "audioreach-pal",
+      "url": "https://github.com/AudioReach/audioreach-pal.git",
+      "branch": "master",
+      "commit": "c7dc7c255106f3dd89db6c6727367fcddea75492",
+      "shallow": true
+    },
+    {
+      "name": "audioreach-graphmgr",
+      "url": "https://github.com/AudioReach/audioreach-graphmgr.git",
+      "branch": "master",
+      "commit": "39f4d320aaa4d72b814e7c52632bb37fa7ce02ce",
+      "shallow": true
+    },
+    {
+      "name": "audioreach-graphservices",
+      "url": "https://github.com/AudioReach/audioreach-graphservices.git",
+      "branch": "master",
+      "commit": "ad9168e474c8c101ba20d1fdeb6e656b66f2feb0",
+      "shallow": true
+    },
+    {
+      "name": "audioreach-kernel",
+      "url": "https://github.com/AudioReach/audioreach-kernel.git",
+      "branch": "master",
+      "commit": "fcf87b7d27d3fcf8b6951c493973f41931617c56",
+      "shallow": true
+    },
+    {
+      "name": "audioreach-engine",
+      "url": "https://github.com/AudioReach/audioreach-engine.git",
+      "branch": "master",
+      "commit": "faa820567ad17b6c4168de390f184bb352fd6784",
+      "shallow": true
+    },
+    {
+      "name": "audioreach-doc",
+      "url": "https://github.com/AudioReach/audioreach-doc.git",
+      "branch": "master",
+      "commit": "8127b514e70630b2f8c592024feb853f750092db",
+      "shallow": true
+    },
+    {
+      "name": "meta-audioreach",
+      "url": "https://github.com/AudioReach/meta-audioreach.git",
+      "branch": "master",
+      "commit": "e4ef44bb8c6a77b7d14a1160394b81d54baa1e85",
+      "shallow": true
+    },
+    {
+      "name": "tinyalsa",
+      "url": "https://github.com/tinyalsa/tinyalsa.git",
+      "branch": "master (recipe source branch; checkout detached)",
+      "commit": "f78ed25aced2dfea743867b8205a787bfb091340",
+      "shallow": true,
+      "downloaded_at_utc": "2026-09-18T16:42:53.491404+00:00",
+      "patches": [
+        "tinyalsa-integration/0001-meson-add-option-to-enable-disable-plugin-support.patch"
+      ],
+      "provenance": "tinyalsa-integration/source-info.json"
+    }
+  ]
+}
